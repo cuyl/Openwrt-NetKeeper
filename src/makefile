@@ -22,13 +22,16 @@ CFLAGS=-Os -Werror -I$(LOCATION)/include -fPIC -DPPPOE_VER='"${PPPD_VER}"'
 # QingHai: qhtel@xiaoyuanyi
 # hebei: hebeicncxinli002
 # ShanDong Mobile : shandongmobile13
+# Shanxi Yixun : sh_xi@xiaoyuan01
+# ShanDong Telecome : 560Ox!a0yuanOlIz  (For 3.7.3 Augest Version)
+# ShanDong Telecome : shdOx!a0yuan01lz  (For 3.7.3 October 27th Version)
 
 # TODO: Change PREFIX1
 # 
 # NanChangV32: '1'
 # Others: '\n'
 
-all:chongqing_sxplugin wuhan_sxplugin hangzhou_sxplugin nanchang_sxplugin qinghai_sxplugin shandongmobile_sxplugin hebei_sxplugin shandongmobile_sxplugin hainan_sxplugin
+all:chongqing_sxplugin wuhan_sxplugin hangzhou_sxplugin nanchang_sxplugin qinghai_sxplugin shandongmobile_sxplugin hebei_sxplugin shandongmobile_sxplugin shanxi_yixun_sxplugin hainan_sxplugin
 	@find *.so
 	@echo "拨号组件编译成功，注意修改confnetwork.sh的sxplugin名称为本省的名称，以及拨号帐号与密码!，然后运行make upload"
 
@@ -56,13 +59,20 @@ nanchang_sxplugin:
 qinghai_sxplugin:
 	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"qhtel@xiaoyuanyi"' -DPREFIX1="'\n'" -shared -o $@.so
 
-
 shandongmobile_sxplugin:
 	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"shandongmobile13"' -DPREFIX1="'\n'" -shared -o $@.so
 
 hebei_sxplugin:
 	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"hebeicncxinli002"' -DPREFIX1="'\n'" -shared -o $@.so
+	
+shanxi_yixun_sxplugin:
+	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"sh_xi@xiaoyuan01"' -DPREFIX1="'\n'" -shared -o $@.so
 
+shandong_telecom_aug_sxplugin:
+	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"560Ox!a0yuanOlIz"' -DPREFIX1="'\n'" -shared -o $@.so
+	
+shandong_telecom_oct_sxplugin:
+	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"shdOx!a0yuan01lz"' -DPREFIX1="'\n'" -shared -o $@.so
 
 hainan_sxplugin:
 	@$(CC) $(CFLAGS) hainan_sxplugin.c -shared -o $@.so
