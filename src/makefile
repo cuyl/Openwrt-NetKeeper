@@ -1,7 +1,7 @@
 #download latest GCC in https://github.com/miao1007/Openwrt-NetKeeper/wiki#2-%E5%A6%82%E4%BD%95%E4%B8%8B%E8%BD%BDgcc
 #This is a demo for MTK7620A
 
-#TODO:填写gcc中bin与include所在的目录（根目录）
+#TODO:填写解压的Toolchain中bin与include所在的目录（根目录）,某些奇葩可能用的是glibc，这里可能要替换LIBC
 LOCATION=../../OpenWrt-Toolchain-ramips-for-mipsel_24kec+dsp-gcc-4.8-linaro_uClibc-0.9.33.2/toolchain-mipsel_24kec+dsp_gcc-4.8-linaro_uClibc-0.9.33.2
 #TODO:请注意不同型号(mips/mipsel)路由器此处gcc文件名可能略有不同
 CC=$(LOCATION)/bin/mipsel-openwrt-linux-gcc
@@ -19,7 +19,8 @@ CFLAGS=-Os -Werror -I$(LOCATION)/include -fPIC -DPPPOE_VER='"${PPPD_VER}"'
 # NanChangV12~V17: radius
 # NanChangV29: nanchang3.0
 # NanChangV32: jiangxi4.0
-# QingHai: qhtel@xiaoyuanyi
+# Xinjiang/qinghai 3.6.27: qhtel@xiaoyuanyi
+# Xinjiang/qinghai 3.7.3 : xinjiang@0724
 # hebei: hebeicncxinli002
 # ShanDong Mobile : shandongmobile13
 # Shanxi Yixun : sh_xi@xiaoyuan01
@@ -32,7 +33,7 @@ CFLAGS=-Os -Werror -I$(LOCATION)/include -fPIC -DPPPOE_VER='"${PPPD_VER}"'
 # NanChangV32: '1'
 # Others: '\n'
 
-all:chongqing_sxplugin wuhan_sxplugin hangzhou_sxplugin nanchang_sxplugin qinghai_sxplugin shandongmobile_sxplugin hebei_sxplugin shandongmobile_sxplugin shanxi_yixun_sxplugin gansu_telecom_sxplugin shandong_telecom_aug_sxplugin shandong_telecom_oct_sxplugin hainan_sxplugin 
+all:chongqing_sxplugin wuhan_sxplugin hangzhou_sxplugin nanchang_sxplugin xinjiang_qinghai_sxplugin shandongmobile_sxplugin hebei_sxplugin shandongmobile_sxplugin shanxi_yixun_sxplugin gansu_telecom_sxplugin shandong_telecom_aug_sxplugin shandong_telecom_oct_sxplugin hainan_sxplugin 
 	@find *.so
 	@echo "拨号组件编译成功，注意修改confnetwork.sh的sxplugin名称为本省的名称，以及拨号帐号与密码!，然后运行make upload"
 
@@ -57,8 +58,8 @@ hangzhou_sxplugin:
 nanchang_sxplugin:
 	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"jiangxi4.0"' -DPREFIX1="'1'" -shared -o $@.so
 
-qinghai_sxplugin:
-	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"qhtel@xiaoyuanyi"' -DPREFIX1="'\n'" -shared -o $@.so
+xinjiang_qinghai_sxplugin:
+	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"xinjiang@0724"' -DPREFIX1="'\n'" -shared -o $@.so
 
 shandongmobile_sxplugin:
 	@$(CC) $(CFLAGS) sxplugin.c -DRADIUS='"shandongmobile13"' -DPREFIX1="'\n'" -shared -o $@.so
