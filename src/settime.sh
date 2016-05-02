@@ -10,7 +10,7 @@ uci set network.timesyn.metric='0'
 uci commit timesyn
 ifdown NetKeeper 
 ifup timesyn
-＃防火墙设置，根据自己路由器上的防火墙设置
+#防火墙设置，根据自己路由器上的防火墙设置
 uci set firewall.@zone[1].network='wan wan6 NetKeeper timesyn' 
 uci commit firewall
 /etc/init.d/firewall restart
